@@ -20,12 +20,12 @@ function caesarEncrypt(text) {
         })
         .join("");
 
-    return `${shift}|${cipher}`;
+    return `${cipher}~|~${shift}`;
 }
 
 function caesarDecrypt(text) {
-    const shift = parseInt(text.split("|")[0]);
-    const cipher = text
+    const [enc, shift] = text.split("~|~");
+    const cipher = enc
         .split("")
         .map((char) => {
             const charCode = char.charCodeAt(0);
@@ -44,7 +44,8 @@ function caesarDecrypt(text) {
                 return char;
             }
         })
-        .join("");
+        .join("")
+        .trim();
 
     return cipher;
 }
