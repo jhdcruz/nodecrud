@@ -32,7 +32,7 @@
       <table class="mx-auto w-full my-6 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" class="px-6 py-3">#</th>
+            <th scope="col" class="px-6 py-3">ID</th>
             <th scope="col" class="px-6 py-3">Name</th>
             <th scope="col" class="px-6 py-3">Email Address</th>
             <th scope="col" class="px-6 py-3">City</th>
@@ -43,19 +43,20 @@
         <tbody class="text-center">
           <% if (fetchData.length) { %>
             <% fetchData.forEach((data, index)=> { %>
+
               <!-- Edit data form -->
-              <%- partial('crud-form', { modalId: "editModal" , editData: data }) -%>
+              <%- partial('crud-form', { modalId: index , editData: data }) -%>
 
                 <tr
                   class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <%= index + 1 %>
+                    <%= data.id %>
                   </th>
                   <td class="px-6 py-4">
-                    <%= data.name %>
+                    <%= data.full_name %>
                   </td>
                   <td class="px-6 py-4">
-                    <%= data.email %>
+                    <%= data.email_address %>
                   </td>
                   <td class="px-6 py-4">
                     <%= data.city %>
@@ -64,7 +65,8 @@
                     <%= data.country %>
                   </td>
                   <td class="px-6 py-4 text-right">
-                    <button href="/crud/edit/<%= data.id %>" data-modal-target="editModal" data-modal-toggle="editModal"
+                    <button href="/crud/edit/<%= data.id %>" data-modal-target="<%= index %>"
+                      data-modal-toggle="<%= index %>"
                       class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Edit</button>
 
                     <a href="/crud/delete/<%= data.id %>"
