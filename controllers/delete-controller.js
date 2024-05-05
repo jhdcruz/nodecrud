@@ -5,7 +5,7 @@ module.exports = {
         const deleteId = req.params.id;
 
         deleteModel.deleteData(deleteId, function (data) {
-            res.redirect("/crud/read");
+            res.redirect("/");
             console.log(data.affectedRows + " record deleted");
         });
     },

@@ -19,7 +19,7 @@ module.exports = {
 
         const updateId = req.params.id;
         updateModel.updateData(inputData, updateId, function (data) {
-            res.redirect("/crud/read");
+            res.redirect("/");
             console.log(data.affectedRows + " record(s) updated");
         });
     },

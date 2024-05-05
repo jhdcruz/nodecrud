@@ -1,10 +1,6 @@
 const createModel = require("../models/create-model");
 
 module.exports = {
-    crudForm: function (req, res) {
-        res.render("crud-form");
-    },
-
     createData: function (req, res) {
         const inputData = {
             full_name: req.body.full_name,
@@ -14,7 +10,7 @@ module.exports = {
         };
 
         createModel.createData(inputData, function (data) {
-            res.redirect("/crud/form");
+            res.redirect("/");
             console.log(data.affectedRows + " record created");
         });
     },
