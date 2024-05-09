@@ -105,6 +105,7 @@ function decryptData(data) {
             email_address: email_address,
             city: city,
             country: country,
+            cipher: item.cipher,
         });
     }));
 }

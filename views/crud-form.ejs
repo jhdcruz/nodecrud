@@ -68,18 +68,24 @@
             placeholder="Country" required />
         </div>
 
-        <label for="cipher" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Encryption
-          Cipher</label>
+        <label for="cipher" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <%=(typeof editData==='undefined' )?'Encryption Method':'Change Encryption Method'%>
+        </label>
         <div class="relative mb-6">
           <select id="cipher" name="cipher"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="" select>Choose a cipher</option>
-            <option value="">None</option>
-            <option value="a">Affine Cipher</option>
-            <option value="c">Caesar Cipher</option>
-            <option value="ac">Affine + Caesar</option>
-            <option value="ca">Caesar + Affine</option>
-
+            <!-- Set selected based on matching editData.cipher -->
+            <option value="" <% if(typeof editData==='undefined' ) { %>selected<% } %>>Choose a cipher</option>
+            <option value="" <% if(typeof editData!=='undefined' && editData.cipher==='' ) { %>selected<% } %>>None
+            </option>
+            <option value="a" <% if(typeof editData!=='undefined' && editData.cipher==='a' ) { %>selected<% } %>>Affine
+                Cipher</option>
+            <option value="c" <% if(typeof editData!=='undefined' && editData.cipher==='c' ) { %>selected<% } %>>Caesar
+                Cipher</option>
+            <option value="ac" <% if(typeof editData!=='undefined' && editData.cipher==='ac' ) { %>selected<% } %>
+                >Affine + Caesar</option>
+            <option value="ca" <% if(typeof editData!=='undefined' && editData.cipher==='ca' ) { %>selected<% } %>
+                >Caesar + Affine</option>
           </select>
           <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
             The system handles key generation automatically.
