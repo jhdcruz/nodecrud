@@ -2,14 +2,12 @@ const readModel = require("../models/read-model");
 const { decryptData } = require("../utils/transformData");
 
 module.exports = {
-    readData: function (req, res) {
-        readModel.readData(function (data) {
-            const searchQuery = "";
-            const decrypted = decryptData(data);
-
+    searchData: function (req, res) {
+        const searchQuery = req.body.q ?? "";
+        readModel.searchData(searchQuery, function (data) {
             res.render("index", {
                 searchQuery: searchQuery,
-                fetchData: decrypted,
+                fetchData: data,
             });
         });
     },

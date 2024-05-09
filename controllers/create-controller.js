@@ -1,5 +1,5 @@
 const createModel = require("../models/create-model");
-const transformData = require("../utils/transformData");
+const { transformData } = require("../utils/transformData");
 
 module.exports = {
     createData: function (req, res) {

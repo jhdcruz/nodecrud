@@ -1,5 +1,5 @@
-const { affineEncrypt } = require("./affine");
-const { caesarEncrypt } = require("./caesar");
+const { affineEncrypt, affineDecrypt } = require("./affine");
+const { caesarEncrypt, caesarDecrypt } = require("./caesar");
 
 /**
  * Handles the encryption of the data
@@ -57,4 +57,56 @@ const transformData = (data) => {
     };
 };
 
-module.exports = transformData;
+function decryptData(data) {
+    return (decrypted = data.map((item) => {
+        let full_name, email_address, city, country;
+
+        switch (item.cipher) {
+            case "a":
+                full_name = affineDecrypt(item.full_name);
+                email_address = affineDecrypt(item.email_address);
+                city = affineDecrypt(item.city);
+                country = affineDecrypt(item.country);
+                break;
+            case "c":
+                full_name = caesarDecrypt(item.full_name);
+                email_address = caesarDecrypt(item.email_address);
+                city = caesarDecrypt(item.city);
+                country = caesarDecrypt(item.country);
+                break;
+            case "ca":
+                full_name = caesarDecrypt(affineDecrypt(item.full_name));
+                email_address = caesarDecrypt(
+                    affineDecrypt(item.email_address)
+                );
+                city = caesarDecrypt(affineDecrypt(item.city));
+                country = caesarDecrypt(affineDecrypt(item.country));
+                break;
+            case "ac":
+                full_name = affineDecrypt(caesarDecrypt(item.full_name));
+                email_address = affineDecrypt(
+                    caesarDecrypt(item.email_address)
+                );
+                city = affineDecrypt(caesarDecrypt(item.city));
+                country = affineDecrypt(caesarDecrypt(item.country));
+                break;
+            default:
+                // no encryption
+                full_name = item.full_name;
+                email_address = item.email_address;
+                city = item.city;
+                country = item.country;
+                break;
+        }
+
+        return new Object({
+            id: item.id,
+            full_name: full_name,
+            email_address: email_address,
+            city: city,
+            country: country,
+        });
+    }));
+}
+
+module.exports = { transformData, decryptData };
