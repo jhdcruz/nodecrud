@@ -84,12 +84,16 @@
             <option value="" <% if(typeof editData==='undefined' ) { %>selected<% } %>>Choose a cipher</option>
             <option value="" <% if(typeof editData!=='undefined' && editData.cipher==='' ) { %>selected<% } %>>None
             </option>
+            <option value="aes256" <% if(typeof editData!=='undefined' && editData.cipher==='aes256' ) { %>selected<% }
+                %>
+                >AES 256 (CBC)</option>
+            <option value="aes256gcm" <% if(typeof editData!=='undefined' && editData.cipher==='aes256gcm' ) { %>
+              selected<% } %>
+                >AES 256 (GCM)</option>
             <option value="a" <% if(typeof editData!=='undefined' && editData.cipher==='a' ) { %>selected<% } %>
-                >Affine
-                Cipher</option>
+                >Affine Cipher</option>
             <option value="c" <% if(typeof editData!=='undefined' && editData.cipher==='c' ) { %>selected<% } %>
-                >Caesar
-                Cipher</option>
+                >Caesar Cipher</option>
             <option value="ac" <% if(typeof editData!=='undefined' && editData.cipher==='ac' ) { %>selected<% } %>
                 >Affine + Caesar</option>
             <option value="ca" <% if(typeof editData!=='undefined' && editData.cipher==='ca' ) { %>selected<% } %>

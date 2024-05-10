@@ -1,5 +1,11 @@
 const { affineEncrypt, affineDecrypt } = require("./affine");
 const { caesarEncrypt, caesarDecrypt } = require("./caesar");
+const {
+    encryptAes,
+    decryptAes,
+    encryptAesGcm,
+    decryptAesGcm,
+} = require("./aes");
 
 /**
  * Handles the encryption of the data
@@ -37,6 +43,20 @@ const transformData = (data) => {
             city = caesarEncrypt(affineEncrypt(data.city));
             country = caesarEncrypt(affineEncrypt(data.country));
             cipher = "ac";
+            break;
+        case "aes256":
+            full_name = encryptAes(data.full_name);
+            email_address = encryptAes(data.email_address);
+            city = encryptAes(data.city);
+            country = encryptAes(data.country);
+            cipher = "aes256";
+            break;
+        case "aes256gcm":
+            full_name = encryptAesGcm(data.full_name);
+            email_address = encryptAesGcm(data.email_address);
+            city = encryptAesGcm(data.city);
+            country = encryptAesGcm(data.country);
+            cipher = "aes256gcm";
             break;
         default:
             // no encryption
@@ -89,6 +109,18 @@ function decryptData(data) {
                 );
                 city = affineDecrypt(caesarDecrypt(item.city));
                 country = affineDecrypt(caesarDecrypt(item.country));
+                break;
+            case "aes256":
+                full_name = decryptAes(item.full_name);
+                email_address = decryptAes(item.email_address);
+                city = decryptAes(item.city);
+                country = decryptAes(item.country);
+                break;
+            case "aes256gcm":
+                full_name = decryptAesGcm(item.full_name);
+                email_address = decryptAesGcm(item.email_address);
+                city = decryptAesGcm(item.city);
+                country = decryptAesGcm(item.country);
                 break;
             default:
                 // no encryption
